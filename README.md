@@ -34,7 +34,13 @@ So why we use AI techniques which solve zero-sum games and which specifically as
 
 The second important part is to assign values to the states of the game. This problem is relatively simple because the game itself gives us a score. Unfortunately trying to maximize the score on its own is not a good approach. One reason for this is that the position of the values and the number of empty valued cells are very important to win the game. For example if we scatter the large values in remote cells, it would be really difficult for us to combine them. Additionally if we have no empty cells available, we risk losing the game at any minute.
 
-For all the above reasons, several heuristics have been suggested such as the Monoticity, the smoothness and the Free Tiles of the board. The main idea is not to use the score alone to evaluate each game-state but instead construct a heuristic composite score that includes the aforementioned scores.
+For all the above reasons, several heuristics have been suggested such as the Monoticity and the Free Tiles of the board. The main idea is not to use the score alone to evaluate each game-state but instead construct a heuristic composite score that includes the aforementioned scores.
+
+Since we likely want to include more than one heuristic evaluation functions, it will be needed to assign weights associated with each individual heuristic. Deciding on an appropriate set of weights will take careful reasoning, along with careful experimentation. The typical heuristic functions used use the following intuitive ideas:
+
+1. Takes into account the Monotonicity property: this tries to ensure that there is no high value stacked in between the small values preventing the merging of the tiles and resulting in a premature end of the game with low score.
+
+2. Takes into account the number of free tiles left: if there is low number of free available tiles, then it’s likely that the game will end with low premature scores, so this heuristic tries to ensure that the player AI agent chooses the move that allows more free spaces by looking ahead.
 
 ### Contributions
 
